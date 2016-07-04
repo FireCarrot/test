@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="munich office">
+					<h2>BlinkOn6</h2>
+					<ul>
+						<li>Held on June 16 and June 17, 2016</li>
+						<li>Google's Munich office</li>
+					</ul>
+				</section>
+				<section data-background="who's here">
+					<h2>Who's in BlinkOn6?</h2>
+					<ul>
+						<li>183 from Googlers</li>
+						<li>32 from others</li>
+						<li>5 from LG Electronics</li>
+					</ul>
+				</section>
+				<section data-background="progressive web app">
+					<section>
+						<h2>Progressive web apps are a thing</h2>
+					</section>
+					<section>
+						<h3>A progressive web app?</h3>
+						<ul>
+							<li>Instant Loading</li>
+							<li>Add to Home Screen</li>
+							<li>Push Notifications</li>
+							<li>Fast</li>
+							<li>Secure</li>
+							<li>Responsive</li>
+						</ul>
+					</section>
+					<section>
+						<h3>How do we help it?</h3>
+						<ol>
+							<li> A more predictable platform </li>
+							<li> A more powerful platform </li>
+							<li> A faster platform </li>
+						</ol>
+					</section>
+				</section>
+				<section>
+                    <section>
+                        <h2>Houdini and the Future of Web</h2>
+                    </section>
+                    <section>
+                        <h3>Build new CSS primitives without waiting for a specification committee</h3>
+                    </section>
+                    <section>
+                                <ul>
+                                    <li class="fragment grow">Typed OM <span class="fragment">: high performance object access to CSSOM</span></li>
+                                    <li class="fragment grow">Properties & Values <span class="fragment">: typed custom properties</span></li>
+                                    <li class="fragment grow">Worklets <span class="fragment">: synchronous, isolated JavaScript execution</span></li>
+                                    <li class="fragment grow">Paint API <span class="fragment">: DIY rendering</span></li>
+                                    <li class="fragment grow">Layout API <span class="fragment">: DIY layout</span></li>
+                                </ul>
+                    </section>
+                    <section>
+                        <h3>Typed OM </h3>
+                        <p class="fragment">Because anything is better than Strings</p>
+                    </section>
+                    <section>
+                        <h3> The problem </h3>
+                        <pre><code class="hljs" data-trim contenteditable>
+ someElement.style.boxShadow =
+ '0px 0px 8px 4px ' + 'rgb(' + r + ',' + g + ',' + b + ')';
+
+someElement.style.transform =
+ 'scale(' + scaleValue + ') rotate(' + rotationValue +
+ 'deg) translate(' + translateValue + 'px)';
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3> Don't build strings </h3>
+                        <pre><code class="hljs" data-trim contenteditable>
+someElement.styleMap.set(
+   'transform',
+   new CSSTransformValue([
+     new CSSScale(2, 2),
+     new CSSRotation(90),
+     new CSSTranslation(new CSSSimpleLength(3, "px"))
+]);
+                        </pre></code>
+                    </section>
+                </section>
+					<section>
+						<h2>Headless Chrome</h2>
+					</section>
+					<section>
+						<h2>Blink Onion Soup</h2>
+					</section>
+					<section>
+						<h2>V8: ECMAScript 2015 and Beyond</h2>
+					</section>
+					<section>
+						<h2>Raw Speed != Feels Faster</h2>
+					</section>
+					<section>
+						<h2>Ignition - an interpreter for V8</h2>
+					</section>
+					<section>
+						<h2>3rd party content</h2>
+					</section>
+					<section>
+						<h2>Feeling Fast for our Users: Building a Smarter Engine</h2>
+					</section>
+					<section>
+						<h2>Client side performance from the perspective of a developer</h2>
+					</section>
+					<section>
+						<h2>Measuring and understanding V8 performance</h2>
+					</section>
+					<section>
+						<h2>How we measure and optimize for RAIL in V8's GC</h2>
+					</section>
+					<section>
+   						<h2>How do you Rail on a low-end device?</h2>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
