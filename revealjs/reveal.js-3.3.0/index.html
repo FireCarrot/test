@@ -114,15 +114,15 @@ someElement.styleMap.set(
 					<section>
    					  <ul>
 					    <li class="fragment">A library for running Chromium in a headless/server environment</li>
-					    <li class="fragment">Expected use cases include <span class="fragment grow">loading web pages,</span> <span class="frament grow">extracting medatada(e.g., the DOM)</span> and <span class="fragment grow">generating bitmaps from page contents</span> -- <span class="fragment grow">using all the modern web platform features provided by Chromium and Blink</span></li>
+					    <li class="fragment">Expected use cases include <span class="fragment fade-out">loading web pages</span><span class="frament fade-out">, extracting medatada(e.g., the DOM)</span><span class="fragment fade-out"> and generating bitmaps from page contents</span><span class="fragment green">-- using all the modern web platform features provided by Chromium and Blink</span></li>
 					  </ul>
 					</section>
 					<section>
 					   <ul>
-					     <li class="fragment">Browser without a UI</li>
-					     <li class="fragment">Able to run in a server environment</li>
-					     <li class="fragment">Intended for testing and automation</li>
-					     <li class="fragment">  Out of Scope: Not an embeddable browser widget</li>
+					     <li class="fragment grow">Browser without a UI</li>
+					     <li class="fragment grow">Able to run in a server environment</li>
+					     <li class="fragment grow">Intended for testing and automation</li>
+					     <li class="fragment shrink">  Out of Scope: Not an embeddable browser widget</li>
 					   </ul>
 					</section>
      				       </section>
@@ -141,23 +141,39 @@ someElement.styleMap.set(
 					     <li class="fragment">Blink platform is modularizing</li>
        					   </ul>
 				        </section>
-					<section data-background="">
-					</section>
 					</section>
 				       </section>
 					<section>
 						<h2>V8: ECMAScript 2015 and Beyond</h2>
 					</section>
 					<section>
-						<h2>Raw Speed != Feels Faster</h2>
-					</section>
-					<section>
 					  <section>
 						<h2>Ignition - an interpreter for V8</h2>
 				          </section>
-					  <section data-background="as-is">
+					  <section>
+					    <h2> as is </h2>
+					    <img width="800" height="300" data-src="resources/v8_compiler_asis.png">
 					  </section>
-					  <section data-background="to-be">
+					  <section>
+					    <h3>What's the problem?</h3>
+					    <ol>
+					      <li> Memory </li>
+					      <li> Startup Speed </li>
+					      <li> Complexity </li>
+					    </ol>
+					  </section>
+					  <section>
+					    <h3>Why Interpreter?</h3>
+					    <ol>
+					      <li> Reduced memory usage </li>
+					      <li> Reduced parsing overhead </li>
+					      <li> Reduced compiler pipeline complexity </li>
+					    </ol>
+					  </section>
+
+					  <section>
+					     <h2> to be </h2>
+					     <img width="800" height="300" data-src="resources/v8_compiler_tobe.png">
 					  </section>
 					  <section data-background="performance measurement">
 					  </section>
