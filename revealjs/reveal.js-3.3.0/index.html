@@ -1,102 +1,160 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-background="munich office">
-					<h2>BlinkOn6</h2>
-					<ul>
-						<li>Held on June 16 and June 17, 2016</li>
-						<li>Google's Munich office</li>
-					</ul>
-				</section>
-				<section data-background="who's here">
-					<h2>Who's in BlinkOn6?</h2>
-					<ul>
-						<li>183 from Googlers</li>
-						<li>32 from others</li>
-						<li>5 from LG Electronics</li>
-					</ul>
-				</section>
-				<section data-background="progressive web app">
-					<section>
-						<h2>Progressive web apps are a thing</h2>
-					</section>
-					<section>
-						<h3>A progressive web app?</h3>
-						<ul>
-							<li>Instant Loading</li>
-							<li>Add to Home Screen</li>
-							<li>Push Notifications</li>
-							<li>Fast</li>
-							<li>Secure</li>
-							<li>Responsive</li>
-						</ul>
-					</section>
-					<section>
-						<h3>How do we help it?</h3>
-						<ol>
-							<li> A more predictable platform </li>
-							<li> A more powerful platform </li>
-							<li> A faster platform </li>
-						</ol>
-					</section>
-				</section>
-				<section>
-                    <section>
-                        <h2>Houdini and the Future of Web</h2>
-                    </section>
-                    <section>
-                        <h3>Build new CSS primitives without waiting for a specification committee</h3>
-                    </section>
-                    <section>
-                                <ul>
-                                    <li class="fragment grow">Typed OM <span class="fragment">: high performance object access to CSSOM</span></li>
-                                    <li class="fragment grow">Properties & Values <span class="fragment">: typed custom properties</span></li>
-                                    <li class="fragment grow">Worklets <span class="fragment">: synchronous, isolated JavaScript execution</span></li>
-                                    <li class="fragment grow">Paint API <span class="fragment">: DIY rendering</span></li>
-                                    <li class="fragment grow">Layout API <span class="fragment">: DIY layout</span></li>
-                                </ul>
-                    </section>
-                    <section>
-                        <h3>Typed OM </h3>
-                        <p class="fragment">Because anything is better than Strings</p>
-                    </section>
-                    <section>
-                        <h3> The problem </h3>
-                        <pre><code class="hljs" data-trim contenteditable>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>BlinkOn6</h2>
+          <ul>
+            <li>Held on June 16 and June 17, 2016</li>
+            <li>Google's Munich office</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Who's in BlinkOn6?</h2>
+          <ul>
+            <li>183 from Googlers</li>
+            <li>32 from others</li>
+            <li>5 from LG Electronics</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h2>Progressive web apps are a thing</h2>
+          </section>
+          <section>
+            <h3>A progressive web app?</h3>
+            <ul>
+              <li>Instant Loading</li>
+              <li>Add to Home Screen</li>
+              <li>Push Notifications</li>
+              <li>Fast</li>
+              <li>Secure</li>
+              <li>Responsive</li>
+            </ul>
+          </section>
+          <section>
+            <h3>How do we help it?</h3>
+            <ol>
+              <li> A more predictable platform </li>
+              <li> A more powerful platform </li>
+              <li> A faster platform </li>
+            </ol>
+          </section>
+          </section>
+          <section>
+            <section>
+              <h2>Ignition - an interpreter for V8</h2>
+             </section>
+           <section>
+              <h2> as is </h2>
+              <img width="800" height="300" data-src="resources/v8_compiler_asis.png">
+            </section>
+            <section>
+              <h3>What's the problem?</h3>
+            </section>
+            <section>
+              <h4>Memory</h4>
+              <p class="fragment"> About 30% of the V8 heap is JITed unoptimized code <br><img with="800" height="150" data-src="resources/v8_asis_memory.png"></p>
+             </section>
+             <section>
+              <h4>Startup Speed</h4>
+              <p class="fragment">Most functions are parsed multiple times <br><img class="fragment" with="800" height="150" data-src="resources/v8_asis_speed.png"><br><span>33% of time spent parsing + compiling</span></p>
+             </section>
+             <section>
+              <h4>Complexity</h4>
+              <p><span class="fragment">Three compilers with complex interdependencies<br><img width="800" height="300" data-src="resources/v8_asis_complexity.png"></span></p>
+             </section>
+              <section>
+                <h3>Why Interpreter?</h3>
+                <ol>
+                    <li> Reduced memory usage <span class="fragment"> Compiled to a concise bytecode, rather than machine code</span></li>
+                    <li> Reduced parsing overhead <span class="fragment"> Bytecode is concise, allowing eager compilation of JS source</span></li>
+                    <li> Reduced compiler pipeline complexity <span class="fragment"> Bytecode is source-of-truth for optimizing/deoptimizing</span></li>
+                </ol>
+              </section>
+
+            <section>
+               <h2> to be </h2>
+               <img width="800" height="300" data-src="resources/v8_compiler_tobe.png">
+            </section>
+            <section>
+              <h2>Ignition Performance</h2>
+              <span class="fragment">Crankshaft and TurboFan disabled</span>
+            </section>
+            <section>
+               <h3>Octane</h3><img width="700" data-src="resources/v8_ignition_perf_octane.png">
+            </section>
+            <section>
+              <h3>Speedometer</h3><img width="700"data-src="resources/v8_ignition_perf_speedometer.png">
+            </section>
+            <section>
+            <h2> Ignition Memory Usage</h2>
+            </section>
+            <section>
+            <h3>Octane</h3><img width="700" data-src="resources/v8_ignition_memory_octane.png">
+            </section>
+            <section>
+              <h3>Mobile Top 10</h3><img width="700" data-src="resources/v8_ignition_memory_mobiletop10.png">
+            </section>
+            </section>
+            </section>
+          </section>
+        <section>
+          <section>
+            <h2>Houdini</h2>
+          </section>
+          <section>
+            <h3>Build new CSS primitives without waiting for a specification committee</h3>
+          </section>
+          <section>
+            <ul>
+              <li class="fragment grow">Typed OM <span class="fragment">: high performance object access to CSSOM</span></li>
+              <li class="fragment grow">Properties & Values <span class="fragment">: typed custom properties</span></li>
+              <li class="fragment grow">Worklets <span class="fragment">: synchronous, isolated JavaScript execution</span></li>
+              <li class="fragment grow">Paint API <span class="fragment">: DIY rendering</span></li>
+              <li class="fragment grow">Layout API <span class="fragment">: DIY layout</span></li>
+            </ul>
+            </section>
+<!--            <section>
+              <h3>Typed OM </h3>
+              <p class="fragment">Because anything is better than Strings</p>
+            </section>
+            <section>
+              <h3> The problem </h3>
+              <pre><code class="hljs" data-trim contenteditable>
  someElement.style.boxShadow =
  '0px 0px 8px 4px ' + 'rgb(' + r + ',' + g + ',' + b + ')';
 
 someElement.style.transform =
  'scale(' + scaleValue + ') rotate(' + rotationValue +
  'deg) translate(' + translateValue + 'px)';
-                        </code></pre>
-                    </section>
-                    <section>
-                        <h3> Don't build strings </h3>
-                        <pre><code class="hljs" data-trim contenteditable>
+               </code></pre>
+               </section>
+               <section>
+                 <h3> Don't build strings </h3>
+                 <pre><code class="hljs" data-trim contenteditable>
 someElement.styleMap.set(
    'transform',
    new CSSTransformValue([
@@ -104,113 +162,142 @@ someElement.styleMap.set(
      new CSSRotation(90),
      new CSSTranslation(new CSSSimpleLength(3, "px"))
 ]);
-                        </pre></code>
-                    </section>
+                  </pre></code>
+                 </section>-->
                 </section>
-		                      <section>
-					<section>
-						<h2>Headless Chrome</h2>
-					</section>
-					<section>
-   					  <ul>
-					    <li class="fragment">A library for running Chromium in a headless/server environment</li>
-					    <li class="fragment">Expected use cases include <span class="fragment fade-out">loading web pages</span><span class="frament fade-out">, extracting medatada(e.g., the DOM)</span><span class="fragment fade-out"> and generating bitmaps from page contents</span><span class="fragment green">-- using all the modern web platform features provided by Chromium and Blink</span></li>
-					  </ul>
-					</section>
-					<section>
-					   <ul>
-					     <li class="fragment grow">Browser without a UI</li>
-					     <li class="fragment grow">Able to run in a server environment</li>
-					     <li class="fragment grow">Intended for testing and automation</li>
-					     <li class="fragment shrink">  Out of Scope: Not an embeddable browser widget</li>
-					   </ul>
-					</section>
-     				       </section>
-				       <section>
-					<section>
-						<h2>Blink Onion Soup</h2>
-					</section>
-					<section>
-					     <h3>Simplified abstractions</h3>
-					     <h3>Reduced duplication</h3>
-					     <ul>
-					     <li class="fragment">Removed a lot of layers</li>
-					     <li class="fragment">Moved from content/renderer to blink</li>
-					     <li class="fragment">Improved performance</li>
-					     <li class="fragment">Services are coming!</li>
-					     <li class="fragment">Blink platform is modularizing</li>
-       					   </ul>
-				        </section>
-					</section>
-				       </section>
-					<section>
-						<h2>V8: ECMAScript 2015 and Beyond</h2>
-					</section>
-					<section>
-					  <section>
-						<h2>Ignition - an interpreter for V8</h2>
-				          </section>
-					  <section>
-					    <h2> as is </h2>
-					    <img width="800" height="300" data-src="resources/v8_compiler_asis.png">
-					  </section>
-					  <section>
-					    <h3>What's the problem?</h3>
-					    <ol>
-					      <li> Memory </li>
-					      <li> Startup Speed </li>
-					      <li> Complexity </li>
-					    </ol>
-					  </section>
-					  <section>
-					    <h3>Why Interpreter?</h3>
-					    <ol>
-					      <li> Reduced memory usage </li>
-					      <li> Reduced parsing overhead </li>
-					      <li> Reduced compiler pipeline complexity </li>
-					    </ol>
-					  </section>
+        <section>
+          <section>
+            <h2>Headless Chrome</h2>
+          </section>
+        <section>
+             <ul>
+               <li class="fragment grow">Browser without a UI</li>
+               <li class="fragment grow">Able to run in a server environment</li>
+               <li class="fragment grow">Intended for testing and automation</li>
+               <li class="fragment shrink">  Out of Scope: Not an embeddable browser widget</li>
+             </ul>
+         </section>
+        <section>
+          <h3> Differences from regular Chrome </h3>
+          <p><img width="500" data-src="resources/chromimum_without_chrome.png"></p>
+          <ul>
+            <li class="fragment"> No chrome-level features (e.g., profiles, sync, safe browsing, ..)</li>
+            <li class="fragment"> No UI -- offscreen software rendering </li>
+            <li class="fragment"> No extensions (for now) </li>
+            <li class="fragment"> No audio </li>
+           </ul>
+           </section>
+           <section>
+            <img width="900" data-src="resources/headless_chrome.png">
+         </section>
+       </section>
+        <section>
+          <section>
+            <h2>Blink Onion Soup</h2>
+          </section>
+          <section>
+            <ol>
+              <li>Simplified abstractions</li>
+              <li>Reduced duplication</li>
+            </ol>
+            </section>
+           <section>
+            <ul>
+               <li class="fragment">Removed a lot of layers</li>
+               <li class="fragment">Moved from content/renderer to blink</li>
+               <li class="fragment">Improved performance</li>
+               <li class="fragment">Services are coming!</li>
+               <li class="fragment">Blink platform is modularizing</li>
+             </ul>
+          </section>
+          </section>
+        <section>
+          <section>
+            <h2>Lots of interventions in progress</h2>
+          </section>
+          <section>
+            <ul>
+                <li>Passive event listeners <video width="320" height="240"><source src="" type="video/mp4"></video></li>
+              <li>IntersectionObservers</li>
+            </ul>
+          </section>
+        </section>
 
-					  <section>
-					     <h2> to be </h2>
-					     <img width="800" height="300" data-src="resources/v8_compiler_tobe.png">
-					  </section>
-					  <section data-background="performance measurement">
-					  </section>
-					  </section>
-					</section>
-					<section>
-						<h2>Feeling Fast for our Users: Building a Smarter Engine</h2>
-					</section>
-					<section>
-						<h2>Measuring and understanding V8 performance</h2>
-					</section>
-					<section>
-						<h2>How we measure and optimize for RAIL in V8's GC</h2>
-					</section>
-					<section>
-   						<h2>How do you Rail on a low-end device?</h2>
-					</section>
-				</section>
-			</div>
-		</div>
+        <section>
+          <section>
+            <h2> Raw Speed != Feeling Fast </h2>
+          </section>
+          <section>
+          <p class="fragment">Historically, focused on raw speed to make engine more powerful</p>
+             <ol class="fragment">
+                <li>Found slow things</li>
+                <li>Making them faster</li>
+                <li>It worked for a time!</li>
+              </ol>
+          </section>
+          <section>
+            <p class="fragment">But more deeply understanding use cases and tuning for them more directly</p>
+            <p class="fragment">RAIL became a thing in early 2015!</p>
+          </section>
+          <section>
+            <h3>RAIL?</h3>
+            <img class="fragment" width=500 data-src="resources/rail.png">
+            <ul>
+                <li class="fragment">Repond in under 100ms</li>
+                <li class="fragment">Render frame every 16ms</li>
+                <li class="fragment">Maximize idle time<span class="fragment"> - Main thread JS work chunked no larger than 50ms to be available enough to handle the next user input</span></li>
+                <li class="fragment">Deliver content under 1000ms</li>
+            </ul>
+            </section>
+            <section>
+              <h3 class="fragment">96 performance projects today and a lot of metrics (probably more than 30)</h3>
+              <h3 class="fragment">What are our metrics?</h3>
+              <h3 class="fragment">Catapult! - fix the performance wiring mess</h3>
+            </section>
+            <section>
+              <h4>Real web page runtime breakdowns</h4><img data-src="v8view.png">
+            </section>
+            <section>
+              <h4>Time-to-interactive breakdown, desktop top 30</h4><img data-src="tti.png">
+            </section>
+            <section>
+              <h4> + Minus network delays and idleness</h4><img data-src="minus.png">
+            </section>
+            <section>
+              <h4> + idleness with v8 internal detail \0/</h4><img data-src="idleness.png">
+            </section>
+            <section>
+              <ul>
+                <li>Memory, power, cpu time, network all work together in one stack</li>
+                <li>Scaling, Monitoring, Actionability</li>
+              </ul>
+            </section>
+          <section>
+            <h2>How we measure and optimize for RAIL in V8's GC</h2>
+          </section>
+        </section>
+        <section>
+          <h2>V8: ECMAScript 2015 and Beyond</h2>
+        </section>
+      </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
