@@ -89,9 +89,9 @@
               <section>
                 <h3>Why Interpreter?</h3>
                 <ol>
-                    <li> Reduced memory usage <span class="fragment"> Compiled to a concise bytecode, rather than machine code</span></li>
-                    <li> Reduced parsing overhead <span class="fragment"> Bytecode is concise, allowing eager compilation of JS source</span></li>
-                    <li> Reduced compiler pipeline complexity <span class="fragment"> Bytecode is source-of-truth for optimizing/deoptimizing</span></li>
+                    <li> Reduced memory usage <p class="fragment"> Compiled to a concise bytecode, rather than machine code</p></li>
+                    <li> Reduced parsing overhead <p class="fragment"> Bytecode is concise, allowing eager compilation of JS source</p></li>
+                    <li> Reduced compiler pipeline complexity <p class="fragment"> Bytecode is source-of-truth for optimizing/deoptimizing</p></li>
                 </ol>
               </section>
 
@@ -117,6 +117,10 @@
             </section>
             <section>
               <h3>Mobile Top 10</h3><img width="700" data-src="resources/v8_ignition_memory_mobiletop10.png">
+            </section>
+            <section>
+              <h3>Eager compilation</h3>
+              <img width=900 data-src="resources/v8_ignition_eager.png">
             </section>
             </section>
             </section>
@@ -216,13 +220,15 @@ someElement.styleMap.set(
             <h2>Lots of interventions in progress</h2>
           </section>
           <section>
-            <ul>
-                <li>Passive event listeners <video width="320" height="240"><source src="" type="video/mp4"></video></li>
-              <li>IntersectionObservers</li>
-            </ul>
+            <h3>Passive event listeners</h3>
+            <iframe width="520" height="366" src="https://www.youtube.com/embed/65VMej8n23A" frameborder="0" allowfullscreen></iframe>
+          </section>
+          <section>
+            <h3>Intersection Observer</h3>
+            <span class="fragment"> Let you know when an observed element enters or exits the browser's viewport</span> <del class="fragment">instead of using getBoundingClientRect() which is painfully slow because it forces the browser to re-layout the entire page</del><br>
+            <img class="fragment" height="500" data-src="resources/intersectionobserver.gif">
           </section>
         </section>
-
         <section>
           <section>
             <h2> Raw Speed != Feeling Fast </h2>
@@ -249,7 +255,7 @@ someElement.styleMap.set(
                 <li class="fragment">Deliver content under 1000ms</li>
             </ul>
             </section>
-            <section>
+<!--            <section>
               <h3 class="fragment">96 performance projects today and a lot of metrics (probably more than 30)</h3>
               <h3 class="fragment">What are our metrics?</h3>
               <h3 class="fragment">Catapult! - fix the performance wiring mess</h3>
@@ -271,14 +277,66 @@ someElement.styleMap.set(
                 <li>Memory, power, cpu time, network all work together in one stack</li>
                 <li>Scaling, Monitoring, Actionability</li>
               </ul>
-            </section>
+              </section>-->
           <section>
             <h2>How we measure and optimize for RAIL in V8's GC</h2>
           </section>
-        </section>
-        <section>
-          <h2>V8: ECMAScript 2015 and Beyond</h2>
-        </section>
+          <section>
+            <h3 class="fragment shrink">Ideally: No GC ever</h3>
+            <h3 class="fragment grow highlight-green">Prioritize</h3>
+            <img class="fragment" data-src="resources/v8_gc_rail.png">
+          </section>
+          <section>
+            <h3>V8 GC Update focusing on A</h3>
+            <h3 class="fragment hightlight-green">Orinoco</h3>
+          </section>
+          <section>
+            <h4>Parallel compaction</h4>
+          </section>
+          <section>
+            <div class="fragment">V8 implements a generational garbage collector</div>
+            <div class="fragment">where objects may move within the young generation,</div>
+            <div class="fragment">from the young to the old generation,</div>
+            <div class="fragment">and within the old generation</div>
+          </section>
+          <section>
+            <h4>The problem is</h4>
+            <div class="fragment">Moving objects is expensive</span></div>
+            <div class="fragment">since underlying memory of objects needs to be copied to new locations and the pointers to those objects are also subject to updating</div>
+          </section>
+          <section>
+            <h5 class="fragment">Sequential moving of objects and updating pointers</h5>
+            <img class="fragment" width=800 data-src="resources/before_orinoco.png">
+          </section>
+          <section>
+            <h5 class="fragment">Parallel moving of objects and updating pointers</h5>
+            <img class="fragment" width=800 data-src="resources/with_orinoco.png">
+            </section>
+          <section>
+            <h4>Black allocation</h4>
+          </section>
+          <section>
+            <img class="fragment" width=700 data-src="resources/gc_events.png">
+            <img class="fragment" width=700 data-src="resources/gc_events2.png">
+          </section>
+          <section>
+            <div class="fragment"> Assumption: </div>
+            <div class="fragment"> Objects allocated during marking will survive the following GC</div>
+            <div class="fragment"> Objects are allocated as live (already marked)</div>
+            <img class="fragment" width=800 data-src="resources/black_allocation.png">
+          </section>
+          <section>
+            <h3>Results: Facebook during A</h3>
+            <img class="fragment" width=700 data-src="resources/orinoco_result.png">
+          </section>
+<!--        <section>
+          <section>
+            <h2>V8: ECMAScript 2015 and Beyond</h2>
+          </section>
+          <section>
+            <h3>
+          </section>
+          </section>-->
       </div>
     </div>
 
