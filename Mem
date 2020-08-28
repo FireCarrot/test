@@ -1,0 +1,108 @@
+#include <unistd.h>
+
+class MemoryMonitor {
+ public:
+  MemoryMonitor() { page_size_ = getpagesize(); }
+  //~MemoryMonitor() { fclose(fstatm); }
+
+  // Returns the sum of all PSS memory in the given process.
+  int GetTotalPSS(int pid)
+  {
+    char path_smaps[64];
+    char buf[1024];
+   char pss_buf[32];
+    int total_pss = 0;
+    int pss;
+    base::OS::SNPrintF(path_smaps, 64, "/proc/%d/smaps", pid);
+
+    FILE *fsmaps = fopen(path_smaps, "r");
+    if (fsmaps == NULL)
+      return -1;
+
+    while ( fgets(buf, 1024, fsmaps) ) {
+      if (!strncmp(buf, "Pss", 3)) {
+	char *p = buf + 3;
+	while (*(++p) == ' ');
+	strcpy(pss_buf, p);
+	pss_buf[strlen(pss_buf) - 4] = '\0';  // 16 kB\n
+	pss = atoi(pss_buf);
+	total_pss += pss;
+	//printf("%d\n", pss);
+      }
+    }
+    fclose(fsmaps);
+
+    return total_pss;
+  }
+
+  int ReadProcStatm(int pid) {
+    char path_statm[64];
+    base::OS::SNPrintF(path_statm, 64, "/proc/%d/statm", pid);
+    FILE *fstatm = fopen(path_statm, "r");
+    if (fstatm == NULL)
+      goto out;
+
+    if (fscanf(fstatm, "%lu %lu %lu", &vmsize_, &vmrss_, &shared_) != 3)
+      goto out;
+
+    fclose(fstatm);
+
+    vmsize_ *= page_size_ / v8::internal::KB;
+    vmrss_  *= page_size_ / v8::internal::KB;
+    shared_ *= page_size_ / v8::internal::KB;
+
+    return 0;
+out:
+    return -1;
+  }
+  inline unsigned long GetVmSize() { return vmsize_; }
+  inline unsigned long GetVmRSS()  { return vmrss_; }
+  inline unsigned long GetShared() { return shared_; }
+
+ private:
+  int page_size_;           // set by getpagesize()
+  //FILE *fstatm_;          // FILE pointer for /proc/[pic]/statm
+  unsigned long vmsize_;    // total program size in KB
+  unsigned long vmrss_;     // resident set size in KB
+  unsigned long shared_;    // shared rss in KB (Rssfile + RssShmem)
+
+  //FILE *fsmap_;        // FILE pointer for /proc/[pic]/smaps
+};
+
+class CollectAllGarbageTask : public CancelableTask {
+ public:
+  explicit CollectAllGarbageTask(Heap* heap)
+      : CancelableTask(heap->isolate()), heap_(heap) {}
+
+  ~CollectAllGarbageTask() override = default;
+
+ private:
+  // v8::internal::CancelableTask overrides.
+  void RunInternal() override {
+    reinterpret_cast<v8::Isolate*>(heap_->isolate())->LowMemoryNotification();
+    heap_->collect_all_garbage_ = false;
+  }
+
+  Heap* heap_;
+  DISALLOW_COPY_AND_ASSIGN(CollectAllGarbageTask);
+};
+
+void Heap::PrintShortHeapStatistics() {
+...
+ PrintIsolate(isolate_, "===================================\n");
+  int pid = base::OS::GetCurrentProcessId();
+  MemoryMonitor mm;
+  mm.ReadProcStatm(pid);
+  PrintIsolate(isolate_, "PID: [%d] PSS: [%d] \n", pid, mm.GetTotalPSS(pid) / 1024);
+  PrintIsolate(isolate_, "===================================\n");
+
+  if (!collect_all_garbage_) {
+    auto taskrunner = V8::GetCurrentPlatform()->GetForegroundTaskRunner(
+                      reinterpret_cast<v8::Isolate*>(isolate()));
+
+    taskrunner->PostDelayedTask(std::make_unique<CollectAllGarbageTask>(this),
+                                60);
+    collect_all_garbage_ = true;
+  }
+  ..
+}
