@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo $1
+while :
+do
+        awk '/Rss:/{ rss_sum += $2 } END { print rss_sum / 1024 }' /proc/$1/smaps >> rss_$1.log
+        awk '/Pss:/{ pss_sum += $2 } END { print pss_sum / 1024 }'  /proc/$1/smaps >> pss_$1.log
+    sleep 60
+done
